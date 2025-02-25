@@ -7,14 +7,14 @@
 //
 
 import SwiftUI
-import TemplatePackage
+import SpeziCLAID
 
 
 @main
 struct UITestsApp: App {
     var body: some Scene {
         WindowGroup {
-            Text(TemplatePackage().stanford)
+            Text(SpeziCLAID().stanford)
         }
     }
 }

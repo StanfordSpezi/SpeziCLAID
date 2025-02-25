@@ -22,7 +22,6 @@ let package = Package(
     dependencies: [
         .package(path: "../CLAID"), // Local path reference
         .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.8.0"),
-        .package(url: "https://github.com/StanfordSpezi/SpeziFoundation", from: "2.1.1"),
         .package(url: "https://github.com/StanfordSpezi/SpeziViews", from: "1.9.0")
     ],
     targets: [
@@ -31,7 +30,6 @@ let package = Package(
             dependencies: [
                 .product(name: "CLAID", package: "CLAID"), // Correct way to reference CLAID
                 .product(name: "Spezi", package: "Spezi"),
-                .product(name: "SpeziFoundation", package: "SpeziFoundation"),
                 .product(name: "SpeziViews", package: "SpeziViews"),
             ]
         ),
