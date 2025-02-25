@@ -7,7 +7,7 @@
 //
 
 /// The main type of the Swift Package template.
-public struct TemplatePackage {
+public struct SpeziCLAID {
     /// The Swift Package template package is provided by Stanford University.
     public var stanford: String {
         "Stanford University"

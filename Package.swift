@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0
 
 //
 // This source file is part of the TemplatePackage open source project
@@ -10,27 +10,35 @@
 
 import PackageDescription
 
-
 let package = Package(
-    name: "TemplatePackage",
+    name: "SpeziCLAID",
     platforms: [
-        .iOS(.v17),
-        .watchOS(.v10),
-        .visionOS(.v1),
-        .tvOS(.v17),
-        .macOS(.v14)
+        .iOS(.v18),
+        .macOS(.v15)
     ],
     products: [
-        .library(name: "TemplatePackage", targets: ["TemplatePackage"])
+        .library(name: "SpeziCLAID", targets: ["SpeziCLAID"])
+    ],
+    dependencies: [
+        .package(path: "../CLAID"), // Local path reference
+        .package(url: "https://github.com/StanfordSpezi/Spezi", from: "1.8.0"),
+        .package(url: "https://github.com/StanfordSpezi/SpeziFoundation", from: "2.1.1"),
+        .package(url: "https://github.com/StanfordSpezi/SpeziViews", from: "1.9.0")
     ],
     targets: [
         .target(
-            name: "TemplatePackage"
+            name: "SpeziCLAID",
+            dependencies: [
+                .product(name: "CLAID", package: "CLAID"), // Correct way to reference CLAID
+                .product(name: "Spezi", package: "Spezi"),
+                .product(name: "SpeziFoundation", package: "SpeziFoundation"),
+                .product(name: "SpeziViews", package: "SpeziViews"),
+            ]
         ),
         .testTarget(
-            name: "TemplatePackageTests",
+            name: "SpeziCLAIDTests",
             dependencies: [
-                .target(name: "TemplatePackage")
+                .target(name: "SpeziCLAID"),
             ]
         )
     ]
