@@ -1,0 +1,20 @@
+{
+    "milliseconds_deadline_to_load_modules": -1,
+    "hosts": [{
+            "hostname": "testHost",
+            "type": "ios",
+            "modules": [
+                {
+                    "type": "TestModule",
+                    "id": "TestMod",
+                    "output_channels": {
+                        "OutputChannel": "Channel"
+                    },
+                    "input_channels": {
+                        "InputChannel": "Channel"
+                    }
+                }
+            ]
+        }
+    ]
+}

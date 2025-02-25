@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		2F9CBEDB2A76C7EC009818FF /* TestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8A431229130A8C005D2B8F /* TestAppUITests.swift */; };
 		2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA7382B290ADFAA007ACEB9 /* TestApp.swift */; };
 		C4A2888C2D6DA76900C81998 /* SpeziCLAID in Frameworks */ = {isa = PBXBuildFile; productRef = C4A2888B2D6DA76900C81998 /* SpeziCLAID */; };
+		C4A2888E2D6E401200C81998 /* CLAIDRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2888D2D6E400900C81998 /* CLAIDRunner.swift */; };
+		C4A288902D6E4DCE00C81998 /* TestMod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2888F2D6E4DC300C81998 /* TestMod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +56,13 @@
 		2FA7382B290ADFAA007ACEB9 /* TestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 		2FB0758A299DDB9000C0B37F /* TestApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestApp.xctestplan; sourceTree = "<group>"; };
 		2FF8922E2A770D4200903A5A /* TestAppWatchApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestAppWatchApp.xctestplan; sourceTree = "<group>"; };
+		C4A2888D2D6E400900C81998 /* CLAIDRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAIDRunner.swift; sourceTree = "<group>"; };
+		C4A2888F2D6E4DC300C81998 /* TestMod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C4A288922D6E4F0F00C81998 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2F6D138F28F5F384007C25D6 /* Frameworks */ = {
@@ -108,6 +116,9 @@
 		2F6D139428F5F384007C25D6 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4A288922D6E4F0F00C81998 /* Resources */,
+				C4A2888F2D6E4DC300C81998 /* TestMod.swift */,
+				C4A2888D2D6E400900C81998 /* CLAIDRunner.swift */,
 				2FA7382B290ADFAA007ACEB9 /* TestApp.swift */,
 				2F6D139928F5F386007C25D6 /* Assets.xcassets */,
 			);
@@ -144,6 +155,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C4A288922D6E4F0F00C81998 /* Resources */,
 			);
 			name = TestApp;
 			packageProductDependencies = (
@@ -266,6 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */,
+				C4A2888E2D6E401200C81998 /* CLAIDRunner.swift in Sources */,
+				C4A288902D6E4DCE00C81998 /* TestMod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

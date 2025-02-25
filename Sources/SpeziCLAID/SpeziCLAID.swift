@@ -6,8 +6,11 @@
 // SPDX-License-Identifier: MIT
 //
 
+import CLAID
 /// The main type of the Swift Package template.
 public struct SpeziCLAID {
+    
+    
     /// The Swift Package template package is provided by Stanford University.
     public var stanford: String {
         "Stanford University"
@@ -15,5 +18,7 @@ public struct SpeziCLAID {
     
     
     /// The main type of the Swift Package template.
-    public init() {}
+    public init() {
+    
+    }
 }

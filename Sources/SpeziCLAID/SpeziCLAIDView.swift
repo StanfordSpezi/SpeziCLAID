@@ -7,6 +7,6 @@
 import SpeziViews
 import SwiftUI
 
-public struct SpeziCLAIDView {
+public protocol SpeziCLAIDView {
     
 }
