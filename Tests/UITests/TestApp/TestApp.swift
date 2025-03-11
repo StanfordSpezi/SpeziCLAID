@@ -5,36 +5,18 @@
 //
 // SPDX-License-Identifier: MIT
 //
-
+import Spezi
 import SwiftUI
-import SpeziCLAID
-import CLAID
+
 
 @main
-struct UITestsApp: App {
-    
-    let claidRunner = CLAIDRunner(
-        configFile: Bundle.main.url(forResource: "test_config", withExtension: "json")!.path,
-        host: "testHost",
-        user: "testUser",
-        device: "testDevice",
-        moduleFactoryRegisration: {
-            
-            let moduleFactory = ModuleFactory()
-            
-            do {
-                try moduleFactory.registerModule(TestMod.self)
-            } catch {
-                
-            }
-            return moduleFactory
-        }
-    )
-    
-    
+struct ExampleApp: App {
+    @ApplicationDelegateAdaptor(SpeziAppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
-            Text(SpeziCLAID().stanford)
+            ContentView()
+                .spezi(appDelegate)
         }
     }
 }

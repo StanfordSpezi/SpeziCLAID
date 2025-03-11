@@ -5,11 +5,16 @@
             "type": "ios",
             "modules": [
                 {
-                    "type": "TestModule",
+                    "type": "TestMod",
                     "id": "TestMod",
                     "output_channels": {
                         "OutputChannel": "Channel"
                     },
+                    
+                },
+                {
+                    "type": "PythonCalculator",
+                    "id": "PythonCalculator",
                     "input_channels": {
                         "InputChannel": "Channel"
                     }

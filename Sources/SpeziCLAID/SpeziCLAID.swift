@@ -7,6 +7,10 @@
 //
 
 import CLAID
+import SwiftPython
+import PythonKit
+import Foundation
+
 /// The main type of the Swift Package template.
 public struct SpeziCLAID {
     
@@ -19,6 +23,10 @@ public struct SpeziCLAID {
     
     /// The main type of the Swift Package template.
     public init() {
-    
+        
     }
+    
+    
 }
+
+
