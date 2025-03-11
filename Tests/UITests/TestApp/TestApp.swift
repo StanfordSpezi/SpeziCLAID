@@ -11,7 +11,7 @@ import SwiftUI
 
 @main
 struct ExampleApp: App {
-    @ApplicationDelegateAdaptor(SpeziAppDelegate.self) var appDelegate
+    @ApplicationDelegateAdaptor(TestAppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {
@@ -19,4 +19,5 @@ struct ExampleApp: App {
                 .spezi(appDelegate)
         }
     }
+    
 }

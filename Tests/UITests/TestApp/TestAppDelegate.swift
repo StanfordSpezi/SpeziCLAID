@@ -8,12 +8,20 @@
 
 import Spezi
 import SpeziCLAID
+import Foundation
 
 
 class TestAppDelegate: SpeziAppDelegate {
     override var configuration: Configuration {
         Configuration(standard: ExampleStandard()) {
-            CLAIDModule()
+            CLAIDPythonModule(
+                pythonModuleFile: "MyAggregator.py",
+                pythonModuleClass: "MyAggregator",
+                pythonModuleId: "SomeModuleIWantToTest"
+            )
+            CLAIDRuntime()
         }
     }
+    
+
 }

@@ -7,10 +7,11 @@
 
 import struct CLAID.Claidservice_ModuleConfig
 import Spezi
+import SwiftProtobuf
 
 @MainActor
-class CLAIDPythonModule : Module {
-    @Dependency var claidDependency = CLAIDModule()
+public class CLAIDPythonModule : Module {
+    @Dependency var claidDependency = CLAIDPythonModuleRegistry()
     
     private let pythonModuleFile: String
     private let pythonModuleClass: String
@@ -20,6 +21,18 @@ class CLAIDPythonModule : Module {
     private let outputChannels: Dictionary<String, String>
     private var moduleConfig: Claidservice_ModuleConfig
    
+    private func dictionaryToProtobufStruct(_ dictionary: [String: String]) -> Google_Protobuf_Struct {
+        var protobufStruct = Google_Protobuf_Struct()
+
+        for (key, value) in dictionary {
+            var protobufValue = Google_Protobuf_Value()
+            protobufValue.stringValue = value
+            protobufStruct.fields[key] = protobufValue
+        }
+
+        return protobufStruct
+    }
+    
     public init(
         pythonModuleFile: String,
         pythonModuleClass: String,
@@ -28,6 +41,7 @@ class CLAIDPythonModule : Module {
         inputChannels: Dictionary<String, String> = [:],
         outputChannels: Dictionary<String, String> = [:]
     ) {
+        print("CLAIDPythonModule init")
         self.pythonModuleFile = pythonModuleFile
         self.pythonModuleClass = pythonModuleClass
         self.pythonModuleId = pythonModuleId
@@ -36,10 +50,24 @@ class CLAIDPythonModule : Module {
         self.outputChannels = outputChannels
         
         self.moduleConfig = Claidservice_ModuleConfig()
-        self.moduleConfig.id = ""
+        self.moduleConfig.type = pythonModuleClass
+        self.moduleConfig.id = pythonModuleId
+        self.moduleConfig.properties = dictionaryToProtobufStruct(moduleProperties)
+        self.moduleConfig.inputChannels = inputChannels
+        self.moduleConfig.outputChannels = outputChannels
+        
+        print("Init")
+        // Add the Module to the CLAID config.
+        
     }
     
     public func configure() {
+        print("CLAIDPythonModule.configure")
+        claidDependency.addPythonModule(
+            pythonFilePath: self.pythonModuleFile,
+            pythonClass: self.pythonModuleClass,
+            moduleConfig: self.moduleConfig
+        )
         
     }
 }
