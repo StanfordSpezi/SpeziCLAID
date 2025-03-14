@@ -1,0 +1,14 @@
+syntax="proto3";
+package spezi_claid;
+option java_package = "speziclaid_datatypes";
+option java_outer_classname = "speziclaid_datatypes";
+option java_multiple_files = true;
+
+message SLEEP_SAMPLE {
+    int32 value = 1;
+    uint64 timestamp = 2;
+}
+
+message SLEEP_DATA {
+    SLEEP_SAMPLE sleep_samples = 1;
+}
