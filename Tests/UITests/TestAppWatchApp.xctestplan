@@ -26,6 +26,7 @@
   },
   "testTargets" : [
     {
+      "enabled" : false,
       "target" : {
         "containerPath" : "container:UITests.xcodeproj",
         "identifier" : "2F9CBEBE2A76C412009818FF",

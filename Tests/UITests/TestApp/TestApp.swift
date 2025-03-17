@@ -5,16 +5,19 @@
 //
 // SPDX-License-Identifier: MIT
 //
-
+import Spezi
 import SwiftUI
-import TemplatePackage
 
 
 @main
-struct UITestsApp: App {
+struct ExampleApp: App {
+    @ApplicationDelegateAdaptor(TestAppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
-            Text(TemplatePackage().stanford)
+            ContentView()
+                .spezi(appDelegate)
         }
     }
+    
 }

@@ -6,13 +6,13 @@
 // SPDX-License-Identifier: MIT
 //
 
-@testable import TemplatePackage
+@testable import SpeziCLAID
 import XCTest
 
 
-final class TemplatePackageTests: XCTestCase {
+final class SpeziCLAIDTests: XCTestCase {
     func testTemplatePackage() throws {
-        let templatePackage = TemplatePackage()
+        let templatePackage = SpeziCLAID()
         XCTAssertEqual(templatePackage.stanford, "Stanford University")
     }
 }
