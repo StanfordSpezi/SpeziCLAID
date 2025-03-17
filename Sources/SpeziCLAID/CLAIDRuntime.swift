@@ -3,19 +3,28 @@ import SwiftPython
 import PythonKit
 import protocol Spezi.Module
 
-typealias SpeziModule = Module
 import CLAID
 
+
+
+
 @MainActor
-public class CLAIDRuntime : SpeziModule {
+public class CLAIDRuntime: Spezi.Module {
     
-    @Dependency var moduleRegistry = CLAIDPythonModuleRegistry()
+    public static var moduleRegistry = CLAIDRegistry()
     
-    private let defaultHostName: String = "default_host"
+    
     private let patchedCLAIDConfig: String = "patched_config.json"
     private var patchedCLAIDConfigPath: String = ""
+    
+    //private let moduleRegistrationFunc: () async throws -> Void
     // Reference to the PyCLAIDLoader module instance defined in "PyCLAIDLoader.py".
     private var pyCLAIDLoader: PythonObject?
+    
+    private var config = Claidservice_CLAIDConfig()
+    private let hostName: String
+    private let userName: String
+    private let deviceId: String
     
     /// Retrieves the path to the CLAID configuration stub file inside the app bundle
     /// - Returns: Path to the configuration file if found, otherwise throws an error
@@ -28,40 +37,37 @@ public class CLAIDRuntime : SpeziModule {
     
     /// Loads the CLAID config from the specified path, then looks up the host and adds the additional Modules to it.
     /// Finally, stores the new config to a different file
-    func updateCLAIDConfig(
-        inputPath: String,
-        hostName: String,
-        modules: [Claidservice_ModuleConfig],
-        outputPath: String
+    func writeOutCLAIDConfig(
+        config: Claidservice_CLAIDConfig
     ) throws {
-        // Read the JSON file
-        let jsonData = try Data(contentsOf: URL(fileURLWithPath: inputPath))
-        
-        // Deserialize JSON to CLAIDConfig
-        var claidConfig = try Claidservice_CLAIDConfig(jsonUTF8Data: jsonData)
-        
-        // Find the host and add the modules
-        if let index = claidConfig.hosts.firstIndex(where: { $0.hostname == hostName }) {
-            claidConfig.hosts[index].modules.append(contentsOf: modules)
-        } else {
-            throw CLAIDError("Unable to find host \(hostName) in configuration file \(inputPath)")
-        }
+        let tempDirectory = FileManager.default.temporaryDirectory
+        let tempOutputPath = tempDirectory.appendingPathComponent(patchedCLAIDConfig).path
+        self.patchedCLAIDConfigPath = tempOutputPath
         
         // Serialize back to JSON
-        let updatedJsonData = try claidConfig.jsonUTF8Data()
+        let jsonData = try config.jsonUTF8Data()
         
         // Save to output path
-        try updatedJsonData.write(to: URL(fileURLWithPath: outputPath))
+        try jsonData.write(to: URL(fileURLWithPath: self.patchedCLAIDConfigPath))
     }
     
     /// Asynchronous initialization of CLAID using configuration stub
     @MainActor
     func startCLAIDFramework() async {
         do {
+            print("Calling module registration func")
+            
+            for (moduleId, module) in CLAIDRuntime.moduleRegistry.preloadedCLAIDModules {
+                print("preloading \(moduleId) of type \(String(describing: type(of: module)))")
+                try await CLAID.registerModule(type(of: module))
+                await CLAID.addPreloadedModule(moduleId: moduleId, module: module)
+            }
+            
+           // try await self.moduleRegistrationFunc()
             // Start CLAID with test configuration
             try await CLAID.start(
                 configFile: patchedCLAIDConfigPath,
-                hostID: defaultHostName,
+                hostID: self.hostName,
                 userID: "test_user",
                 deviceID: "test_device"
             )
@@ -89,7 +95,7 @@ public class CLAIDRuntime : SpeziModule {
             sys.path.append(packageDirectory)
             
             // This folder contains the PyCLAIDLoader.py, so we have to add it to the Python path.
-            let bundleDir = "\(scriptDirectory)/SpeziCLAID_SpeziCLAID.bundle"
+            let bundleDir = "\(scriptDirectory)/SpeziCLAID_SpeziCLAID.bundle/Python"
             sys.path.append(bundleDir)
             
             // Add the current Bundle as path as well, enabling us to import Python files from the Resources.
@@ -103,7 +109,7 @@ public class CLAIDRuntime : SpeziModule {
             }
             
             // Import and add each registered Python module
-            try moduleRegistry.pythonModuleDetails.forEach { moduleInfo in
+            try CLAIDRuntime.moduleRegistry.pythonModuleDetails.forEach { moduleInfo in
                 let result = pyCLAIDLoader.import_and_add_module(
                     scriptDirectory,
                     moduleInfo.pythonFilePath,
@@ -119,27 +125,13 @@ public class CLAIDRuntime : SpeziModule {
         
     }
     
-    func patchCLAIDConfig() throws {
-        guard let testConfigPath = try getCLAIDConfigStubPath() else {
-            throw CLAIDError("Failed to update CLAID config, cannot retrieve config path.")
-        }
-        let tempDirectory = FileManager.default.temporaryDirectory
-        let tempOutputPath = tempDirectory.appendingPathComponent(patchedCLAIDConfig).path
-        self.patchedCLAIDConfigPath = tempOutputPath
-        
-        try updateCLAIDConfig(
-            inputPath: testConfigPath,
-            hostName: defaultHostName,
-            modules: moduleRegistry.additionalModulesConfig,
-            outputPath: self.patchedCLAIDConfigPath
-        )
-    }
+  
     
     /// Initializes the Python interpreter and starts CLAID
     /// - Throws: CLAIDError if initialization fails
     public func start() throws {
         try setUpPythonDependencies()
-        try patchCLAIDConfig()
+        try writeOutCLAIDConfig(config: self.config)
         
         // Start asynchronous initialization.
         Task {
@@ -149,7 +141,19 @@ public class CLAIDRuntime : SpeziModule {
 
         
     /// Default initializer for the CLAIDModule
-    public init() {}
+    public init(hostName: String, userName: String, deviceId: String) {
+        // self.moduleRegistrationFunc = registerModules
+        self.hostName = hostName
+        self.userName = userName
+        self.deviceId = deviceId
+        
+        self.config = Claidservice_CLAIDConfig()
+        var hostconfig = Claidservice_HostConfig()
+        hostconfig.hostname = hostName
+        hostconfig.modules = CLAIDRuntime.moduleRegistry.moduleConfigurations
+        
+        self.config.hosts.append(hostconfig)
+   }
     
     /// Configures and starts the CLAID module
     /// - Throws: CLAIDError if initialization fails

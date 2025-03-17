@@ -6,7 +6,7 @@ swift_datatypes:
 
 .PHONY: python_datatypes
 python_datatypes:
-	protoc -I ./ --python_betterproto_out=../Resources *.proto
+	protoc -I ./ --python_betterproto_out=../Python *.proto
 
 .PHONY: datatypes
 datatypes: swift_datatypes python_datatypes

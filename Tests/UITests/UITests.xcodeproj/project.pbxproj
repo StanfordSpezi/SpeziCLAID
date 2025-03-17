@@ -15,6 +15,8 @@
 		C48508F72D7FFAEA00C84E85 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48508F62D7FFAEA00C84E85 /* TestAppDelegate.swift */; };
 		C48508F92D7FFB2E00C84E85 /* ExampleStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48508F82D7FFB2A00C84E85 /* ExampleStandard.swift */; };
 		C48A17352D78D1E6007BCC12 /* SpeziCLAID in Frameworks */ = {isa = PBXBuildFile; productRef = C48A17342D78D1E6007BCC12 /* SpeziCLAID */; };
+		C4C888F12D850E9E0043B751 /* SleepAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C888F02D850E8A0043B751 /* SleepAnalyzer.swift */; };
+		C4C889062D879F250043B751 /* SleepAggregatorPy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C889052D879F1F0043B751 /* SleepAggregatorPy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		C48508F62D7FFAEA00C84E85 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		C48508F82D7FFB2A00C84E85 /* ExampleStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleStandard.swift; sourceTree = "<group>"; };
 		C48EE5E52D767B3F00A5E218 /* TestApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		C4C888F02D850E8A0043B751 /* SleepAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepAnalyzer.swift; sourceTree = "<group>"; };
+		C4C889052D879F1F0043B751 /* SleepAggregatorPy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepAggregatorPy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -119,9 +123,11 @@
 		2F6D139428F5F384007C25D6 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4C889052D879F1F0043B751 /* SleepAggregatorPy.swift */,
 				C4A288922D6E4F0F00C81998 /* Resources */,
 				2FA7382B290ADFAA007ACEB9 /* TestApp.swift */,
 				C48508F62D7FFAEA00C84E85 /* TestAppDelegate.swift */,
+				C4C888F02D850E8A0043B751 /* SleepAnalyzer.swift */,
 				C48508F82D7FFB2A00C84E85 /* ExampleStandard.swift */,
 				C48508F42D7FFAAB00C84E85 /* ContentView.swift */,
 				2F6D139928F5F386007C25D6 /* Assets.xcassets */,
@@ -287,6 +293,8 @@
 			files = (
 				C48508F72D7FFAEA00C84E85 /* TestAppDelegate.swift in Sources */,
 				C48508F92D7FFB2E00C84E85 /* ExampleStandard.swift in Sources */,
+				C4C888F12D850E9E0043B751 /* SleepAnalyzer.swift in Sources */,
+				C4C889062D879F250043B751 /* SleepAggregatorPy.swift in Sources */,
 				C48508F52D7FFAAB00C84E85 /* ContentView.swift in Sources */,
 				2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */,
 			);

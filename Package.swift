@@ -35,7 +35,7 @@ let package = Package(
                 .product(name: "SpeziViews", package: "SpeziViews")
             ],
             resources: [
-                .process("Resources")
+                .copy("Python")
             ]
         ),
         /*.target(name: "SpeziCLAIDNative",

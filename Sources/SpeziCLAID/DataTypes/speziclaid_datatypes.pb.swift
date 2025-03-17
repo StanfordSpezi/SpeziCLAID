@@ -20,7 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-public struct SpeziClaid_SLEEP_SAMPLE: Sendable {
+public struct SpeziClaid_SleepSample: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -34,13 +34,13 @@ public struct SpeziClaid_SLEEP_SAMPLE: Sendable {
   public init() {}
 }
 
-public struct SpeziClaid_SLEEP_DATA: Sendable {
+public struct SpeziClaid_SleepData: Sendable {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var sleepSamples: SpeziClaid_SLEEP_SAMPLE {
-    get {return _sleepSamples ?? SpeziClaid_SLEEP_SAMPLE()}
+  public var sleepSamples: SpeziClaid_SleepSample {
+    get {return _sleepSamples ?? SpeziClaid_SleepSample()}
     set {_sleepSamples = newValue}
   }
   /// Returns true if `sleepSamples` has been explicitly set.
@@ -52,15 +52,15 @@ public struct SpeziClaid_SLEEP_DATA: Sendable {
 
   public init() {}
 
-  fileprivate var _sleepSamples: SpeziClaid_SLEEP_SAMPLE? = nil
+  fileprivate var _sleepSamples: SpeziClaid_SleepSample? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "spezi_claid"
 
-extension SpeziClaid_SLEEP_SAMPLE: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SLEEP_SAMPLE"
+extension SpeziClaid_SleepSample: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SleepSample"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "value"),
     2: .same(proto: "timestamp"),
@@ -89,7 +89,7 @@ extension SpeziClaid_SLEEP_SAMPLE: SwiftProtobuf.Message, SwiftProtobuf._Message
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: SpeziClaid_SLEEP_SAMPLE, rhs: SpeziClaid_SLEEP_SAMPLE) -> Bool {
+  public static func ==(lhs: SpeziClaid_SleepSample, rhs: SpeziClaid_SleepSample) -> Bool {
     if lhs.value != rhs.value {return false}
     if lhs.timestamp != rhs.timestamp {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -97,8 +97,8 @@ extension SpeziClaid_SLEEP_SAMPLE: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension SpeziClaid_SLEEP_DATA: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SLEEP_DATA"
+extension SpeziClaid_SleepData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SleepData"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "sleep_samples"),
   ]
@@ -126,7 +126,7 @@ extension SpeziClaid_SLEEP_DATA: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: SpeziClaid_SLEEP_DATA, rhs: SpeziClaid_SLEEP_DATA) -> Bool {
+  public static func ==(lhs: SpeziClaid_SleepData, rhs: SpeziClaid_SleepData) -> Bool {
     if lhs._sleepSamples != rhs._sleepSamples {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
